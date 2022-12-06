@@ -2,7 +2,15 @@ import { Characters } from "./All"
 
 export class Thief extends Characters{
 
-    constructor(health : number = 100, attack : number = 25, action : string = "Run!") {
-        super(health, attack, action)
+        constructor(){
+            super()
+            this.health = 100
+            this.attack = 25
+            this.pers = "Thief"
+            this.action = "Run!"
+        }
+        hit(enemy:any){     
+        }
+        ability(): void {
         }
 }

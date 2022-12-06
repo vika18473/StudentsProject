@@ -1,13 +1,13 @@
 export abstract class Characters{
-    private  health : number 
-    private  attack : number 
-    private  action : string
+    protected  health : number 
+    protected  attack : number 
+    protected  action : string  //действие
+    protected pers: string
 
-    constructor(health : number, attack : number, action: string) {
-        this.health = health
-        this.attack = attack
-        this.action = action
+    get characterHP(): number {
+        return this.health
     }
-    hit = () => `I'm attacking with ${this.attack}!`
-    ability = () => `${this.action}`
+
+    abstract hit(enemy:any):any //attack
+    abstract ability(): void;  //способность
 }
