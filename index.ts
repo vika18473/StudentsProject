@@ -1,19 +1,10 @@
-// import {Create} from "./characters/Chair"
 import express from "express"
 import WebSocket  from "ws"
-import {login,register,updateMe}  from "./Controller/UserController"
-import {getAllClass} from"./Controller/CharacterController"
+import {router} from "./router/router"
 
-const app = express()
-app.use(express.json())
-
-
-app.post("/auth/register", register)
-app.post("/auth/login", login)
-app.patch("/me/:id", updateMe)
-app.get("/class", getAllClass)
-
-
+const app = express();
+app.use(express.json());
+app.use('/', router);
 
 app.listen(3000,() => {
 console.log("Server started")
@@ -39,16 +30,7 @@ ws.on("connection",(ws)=>{
   })
 })
 
-// let pers1 = Create.createPers("Magician")
-// let pers2 = Create.createPers("Warrior")
-// let pers3 = Create.createPers("Thief")
-// let pers4 = Create.createPers("NO")
 
-
-// console.log(pers1)
-// console.log(pers2)
-// console.log(pers3)
-// console.log(pers4)
 
 
 
