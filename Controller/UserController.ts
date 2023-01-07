@@ -1,41 +1,51 @@
+import {login,register, getMe, updateUser} from "../service/userService"
 
-export async function login(req:any,res:any){
-    try {
-        const {email,password} = req.body
-        return res.json({message:"create JWT token"})
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({message:"Failed to login "})
-    }
-}
-
-export async function register(req:any,res:any){
-    try {
-        const {email, password1, password2 , CharactersClass} = req.body
-        if(password1 !== password2){
-            return res.status(400).json({message:"Passwords do not match "})
+export class UserController{
+     static async login(req:any,res:any){
+        try {
+            const token = await login(req.body)
+                return res.json(token)
+        } catch (error) {
+            return res.status(500).json({message:"Failed to login "})
         }
-        return res.status(201).json({success:true})
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({message:"Failed to register "})
     }
-}
 
-
-export async function updateMe(req:any,res:any){
-    try {
-        const id = req.userId
-        const {newpassword1,newpassword2} = req.body
-        if(newpassword1 !== newpassword2){
-            return res.status(400).json({message:"Passwords do not match "})
+    static async register(req:any,res:any){
+        try {
+            const user = await register(req.body)
+            return res.status(201).json(user)
+         
+        } catch (error) {
+            return res.status(500).json({message:"Failed to register "})
         }
-        return res.json({message:"create new JWT"})
+    }
+
+     static async update(req:any,res:any){
+        try {
+            const newUser = await updateUser(req.body)
+            return res.json(newUser)
+        } catch (error) {
+            return res.status(500).json({message:"Something went wrong "})
+        }
+    }
+
+   static async getMe(req:any, res: any){
+    try {
+        const user = await getMe(req.userId)
+        return res.json(user)
     } catch (error) {
-        console.log(error)
         return res.status(500).json({message:"Something went wrong "})
     }
+   }
+
 }
+
+
+
+
+
+
+
 
 
 
