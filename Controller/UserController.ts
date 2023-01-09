@@ -1,9 +1,9 @@
-import {login,register, getMe, updateUser} from "../service/userService"
+import {UserService} from "../service/userService"
 
 export class UserController{
      static async login(req:any,res:any){
         try {
-            const token = await login(req.body)
+            const token = await UserService.login(req.body)
                 return res.json(token)
         } catch (error) {
             return res.status(500).json({message:"Failed to login "})
@@ -12,7 +12,7 @@ export class UserController{
 
     static async register(req:any,res:any){
         try {
-            const user = await register(req.body)
+            const user = await UserService.register(req.body)
             return res.status(201).json(user)
          
         } catch (error) {
@@ -22,7 +22,7 @@ export class UserController{
 
      static async update(req:any,res:any){
         try {
-            const newUser = await updateUser(req.body)
+            const newUser = await UserService.updateUser(req.body)
             return res.json(newUser)
         } catch (error) {
             return res.status(500).json({message:"Something went wrong "})
@@ -31,7 +31,7 @@ export class UserController{
 
    static async getMe(req:any, res: any){
     try {
-        const user = await getMe(req.userId)
+        const user = await UserService.getMe(req.userId)
         return res.json(user)
     } catch (error) {
         return res.status(500).json({message:"Something went wrong "})

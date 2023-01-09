@@ -1,24 +1,25 @@
 import jwt from "jsonwebtoken"
+import { jwtSecret } from "../config"
 
-
-    export async function register(user:any){
+export class UserService {
+    static async register(user:any){
     }
      
-    export async function login(user:any){
+    static async  login(user:any){
         const token = jwt.sign({
         id:user.id,email:user.email,password:user.password
         },
-    "secret123",
+        jwtSecret,
     {expiresIn: '24h'})
     return token
     }
 
-    export async function getMe(user:any){
+    static async  getMe(user:any){
 
     }
 
-    export async function updateUser(user:any){
+    static async  updateUser(user:any){
 
     }
 
-
+}
