@@ -1,34 +1,28 @@
+import { verify } from "./middleware/EventHandler";
 import express from "express"
-import WebSocket  from "ws"
+import {Server}  from "socket.io"
 import {router} from "./router/router"
+import {Check} from "./middleware/checkAuth"
+import { handlerValidError } from "./middleware/handlerValidationError";
+import {EventsController} from "./Controller/WsController"
 
 const app = express();
 app.use(express.json());
 app.use('/', router);
+
+app.use(handlerValidError);
 
 app.listen(3000,() => {
 console.log("Server started")
 })
 
 //ws
-const ws = new WebSocket.Server({
-  port:3001
-}) 
+const io = new Server(3001) 
+// io.on('connection', (socket: any) => {
+//     EventsController.connection(io);
+//  });
 
-ws.on("connection",(ws)=>{
-  console.log("new connection")
-  ws.on("message",(message:string)=>{
-    let data = (JSON.parse(message))
-    
-    if(data.message == "hit"){
-      console.log("hittt")
-      ws.send(`hit ${data.id}`)
-    }
-    if(data.message == "ability"){
-      ws.send(`ability ${data.id}`)
-    }
-  })
-})
+io.use(Check.CheckWsToken).on("connection", verify)
 
 
 
