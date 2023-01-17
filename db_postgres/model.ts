@@ -17,7 +17,7 @@ interface classesInstance
   extends Model<classesAttributes, classesCreationAttributes>,
     classesAttributes {
       createdAt?: Date;
-      updatedAt?: Date;
+      updateAt?: Date;
     }
 
 const Classes = db.define<classesInstance>(
@@ -25,7 +25,7 @@ const Classes = db.define<classesInstance>(
   {
     id: {
       allowNull: false,
-      autoIncrement: false,
+      autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
       unique: true,
@@ -55,7 +55,7 @@ const Classes = db.define<classesInstance>(
 );
 interface usersAttributes {
   id: number
-  username: string
+  name: string
   email: string
   password: string
   class_id:number
@@ -68,7 +68,7 @@ interface usersInstance
   extends Model<usersAttributes, usersCreationAttributes>,
     usersAttributes {
       createdAt?: Date;
-      updatedAt?: Date;
+      updateAt?: Date;
     }
 
 const Users = db.define<usersInstance>(
@@ -76,12 +76,12 @@ const Users = db.define<usersInstance>(
   {
     id: {
       allowNull: false,
-      autoIncrement: false,
+      autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
       unique: true,
     },
-    username:{
+    name:{
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,

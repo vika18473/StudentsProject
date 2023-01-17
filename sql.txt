@@ -1,0 +1,14 @@
+SELECT email FROM USERS 
+
+INSERT INTO CLASSES(name,health,damage, attack_type, ability) VALUES('Warrior', 200, 50, 'ydar mechom', true )
+
+INSERT INTO USERS(name, email,password, class_Id) VALUES('vika', 'vika18473@gmail.com', 'passwordHash', 1)
+
+SELECT COUNT(users."class_Id") FROM users 
+
+UPDATE users SET email = 'test@gmail.com' WHERE id=4
+
+SELECT u.id, u.email, u.name
+FROM users as u
+LEFT JOIN classes as c 
+ON u."class_Id" = c.id
