@@ -8,8 +8,8 @@ export class Check{
   
  if(token){
     try {
-        const decoded = jwt.verify(token, jwtSecret)
-        req.user = decoded
+        const decoded: any = jwt.verify(token, jwtSecret)
+        req.body.id = decoded.id
         next()
     } catch (err) {
         return next(ApiError.UnAuth("User not authorization"))
