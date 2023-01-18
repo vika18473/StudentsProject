@@ -5,6 +5,8 @@ import {router} from "./router/router"
 import {Check} from "./middleware/checkAuth"
 import { handlerValidError } from "./middleware/handlerValidationError";
 import {EventsController} from "./Controller/WsController"
+import {db} from "./db_postgres/db"
+import {Users,Classes} from "./db_postgres/model"
 
 const app = express();
 app.use(express.json());
@@ -12,9 +14,25 @@ app.use('/', router);
 
 app.use(handlerValidError);
 
-app.listen(3000,() => {
-console.log("Server started")
-})
+// app.listen(3000,() => {
+// console.log("Server started")
+// })
+
+async function start() {
+    try {
+      app.listen(3000, async()=>{
+        console.log("Server started : 3000")
+      });
+  
+await db.authenticate()
+    await Classes.sync()
+    await Users.sync()
+    console.log("database connection")
+} catch (error) {
+  console.log(error)
+}
+}
+start()
 
 //ws
 const io = new Server(3001) 

@@ -5,8 +5,7 @@ let users:any = []
 
 export class EventsController {
     static async connection(io: any) {
-        users.push(io.id)
-        console.log(users)
+        users.push(io)
        console.log(`new connetction ${io.id} user.`);
     }
 
@@ -33,7 +32,7 @@ export class EventsController {
 
     static async message(io:any, data:any){
         users.forEach(function (value:any) {
-                return io.emit("message", data.message)
+                return value.emit("message", data.message)
         })
     }
     }
