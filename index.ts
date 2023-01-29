@@ -3,10 +3,11 @@ import express from "express"
 import {Server}  from "socket.io"
 import {router} from "./router/router"
 import {Check} from "./middleware/checkAuth"
-import { handlerValidError } from "./middleware/handlerValidationError";
+import handlerValidError  from "./middleware/handlerValidationError";
 import {EventsController} from "./Controller/WsController"
 import {db} from "./db_postgres/db"
-import {Users,Classes} from "./db_postgres/model"
+import {Users} from "./db_postgres/UsersModel"
+import {Classes} from "./db_postgres/ClassesModel"
 
 const app = express();
 app.use(express.json());
