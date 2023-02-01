@@ -7,7 +7,7 @@ This project uses 2 Database, Postgres and Mongodb,
 To run this project do the following:
 
 - compile the repository to yourself
-- in the terminal, specify the command "npm i", to connect all the libraries
+- in the terminal, specify the command **"npm i"**, to connect all the libraries
 - you must create a "build" folder in the main project
 - create a "config" folder and following the example below, specify your data to connect to the database:
 
@@ -26,9 +26,9 @@ export class PostgreSQL{
 
 DATABASE_URL="postgres://postgres:password@localhost:5432/StudentsProject"
 
-- in order for all tables to be loaded into postgres, specify this command "npm run migrate up" 
-- after which you need to write "npm run build" in the terminal - this will build the project
-- final command "npm run start"
+- in order for all tables to be loaded into postgres, specify this command **"npm run migrate up"** 
+- after which you need to write **"npm run build"** in the terminal - this will build the project
+- final command **"npm run start"**
 
 After it, you can open the postman, test all the crud requests, create several WebSocket Requests (insert an active jwt token there, register events) and enjoy the game)
 
